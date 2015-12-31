@@ -100,3 +100,5 @@ var FullSwipe = React.createClass({
   }
 });
 ```
+
+TODO: Unit tests and background image

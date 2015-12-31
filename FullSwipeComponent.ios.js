@@ -31,21 +31,8 @@ var {
  If it has more than four, it errors and shows 0.
 
  TODO: for cover: add  backgroundImage
+ TODO: Add unit tests
  */
-//Example:
-
-//<FullSwipeComponent
-//  title={"Test Full Swipe"}
-//  height={item.height}
-//  menuItems={menuItems}
-//  menuBackgroundColor={item.menuBackgroundColor}
-//  fontSize={item.fontSize}
-//  fontFamily={item.fontFamily}
-//  backgroundColor={item.backgroundColor}
-//  backgroundImage={item.backgroundImage}
-//  onPress={() => {
-//                    console.table(list);
-//                  }}/>
 
 let menuWidth = window.width * .9;
 let forceMin = menuWidth * .6;
@@ -143,7 +130,6 @@ export default React.createClass({
       fontFamily,
       fontSize,
       backgroundColor,
-      backgroundImage,
       menuBackgroundColor,
       letterSpacing,
       } = this.props;
@@ -154,8 +140,8 @@ export default React.createClass({
     letterSpacing = letterSpacing || 2;
     backgroundColor = backgroundColor || '#FFF';
     menuBackgroundColor = menuBackgroundColor || '#F2F2F2';
+    onPress = onPress || function () {console.log("No onPress defined")};
 
-    backgroundImage = backgroundImage || 'http://public.media.smithsonianmag.com/legacy_blog/dirt_threeboy.jpg';
     //TODO: BackgroundImage not working. {/*  <Image source={{uri:backgroundImage}} style={[{resizeMode: 'cover'}]}/> */}
     const menuItems = (() => {
       if (!this.props.menuItems) {
