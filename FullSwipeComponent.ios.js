@@ -167,10 +167,11 @@ export default React.createClass({
     }
 
     let leftDistance = getDistance(itemWidth);
+    let thisOpacity = this.state.open ? 1 : opacity;
 
     return (
       //TODO: If you delete one, the one below it becomes 'swiped'. Create an swiped bool value to stop this?
-      <View style={[styles.underMenu, {backgroundColor: menuBackgroundColor, opacity}]}>
+      <View style={[styles.underMenu, {backgroundColor: menuBackgroundColor, opacity: thisOpacity}]}>
 
         {/*   Container component for menu items UNDER the cover   */}
 
