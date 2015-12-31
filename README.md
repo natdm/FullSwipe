@@ -80,6 +80,7 @@ const listOfItems = [
     onPress: () => {console.log("Hello")},
     backgroundColor: 'lightblue',
     iconSource: 'http://web.bilecik.edu.tr/murat-ozalp/files/2015/08/GoLang.png',
+    opacity: .9,
     menuItems: [
       {
         title: "Facebook",
@@ -124,15 +125,16 @@ var FullSwipe = React.createClass({
       backgroundColor={item.backgroundColor}
       backgroundImage={item.backgroundImage}
       iconSource={item.iconSource}
+      opacity={item.opacity}
       onPress={item.onPress}/>
     ));
     return (
-      <View style={styles.container}>
+      <Image style={styles.container} source={{uri:'http://static3.depositphotos.com/1000189/134/i/950/depositphotos_1340581-Green-Grass-Background.jpg'}}>
         <Text style={styles.welcome}>
           Example Full Swipe
         </Text>
         {CompiledList}
-      </View>
+      </Image>
     );
   }
 });
@@ -142,7 +144,8 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    //backgroundColor: '#F5FCFF',
+    resizeMode: "cover",
   },
   welcome: {
     fontSize: 20,
