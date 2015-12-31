@@ -4,7 +4,7 @@
 
 ###Example:
 
-Map the following:
+
 ```javascript
 const listOfItems = [
   {
@@ -73,18 +73,30 @@ const listOfItems = [
     ]
   }
 ];
-```
-to
 
-```javascript
-<FullSwipeComponent
-  title={"Test Full Swipe"}
-  height={item.height}
-  menuItems={menuItems}
-  menuBackgroundColor={item.menuBackgroundColor}
-  fontSize={item.fontSize}
-  fontFamily={item.fontFamily}
-  backgroundColor={item.backgroundColor}
-  backgroundImage={item.backgroundImage}
-  onPress={() => {console.table(list)}}/>
+var FullSwipe = React.createClass({
+  render: function() {
+    const CompiledList = listOfItems.map((item, it) => (
+    <FullSwipeComponent
+      key={it}
+      title={item.title}
+      height={item.height}
+      menuItems={item.menuItems}
+      menuBackgroundColor={item.menuBackgroundColor}
+      fontSize={item.fontSize}
+      fontFamily={item.fontFamily}
+      backgroundColor={item.backgroundColor}
+      backgroundImage={item.backgroundImage}
+      onPress={item.onPress}/>
+    ));
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Example Full Swipe
+        </Text>
+        {CompiledList}
+      </View>
+    );
+  }
+});
 ```
