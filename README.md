@@ -1,6 +1,6 @@
 #Full Swipe React-Native Component
 
-![alt tag](https://raw.githubusercontent.com/natdm/FullSwipe/master/images/FullSwipe.gif)
+![alt tag](https://raw.githubusercontent.com/natdm/FullSwipe/master/images/FullSwipe_resize.gif)
 
 ###Example:
 ```javascript
