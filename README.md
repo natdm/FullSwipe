@@ -3,7 +3,7 @@
 ![alt tag](https://raw.githubusercontent.com/natdm/FullSwipe/master/images/FullSwipe_resize.gif)
 
 
-Props:
+###Props:
 * title
   *  optional string/int
 * iconSource
@@ -23,7 +23,7 @@ Props:
 * onPress
   *  optional function
 
-menuItem props:
+###menuItem props:
 
 * title
   *  optional string/int
