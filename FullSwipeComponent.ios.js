@@ -42,6 +42,21 @@ let forceMinClose = menuWidth * .3;
 import IconComponent from './components/IconComponent.ios'
 
 export default React.createClass({
+
+  propTypes: {
+    title: React.PropTypes.string,
+    height: React.PropTypes.number,
+    menuItems: React.PropTypes.array,
+    menuBackgroundColor: React.PropTypes.string,
+    fontSize: React.PropTypes.number,
+    fontFamily: React.PropTypes.string,
+    backgroundColor: React.PropTypes.string,
+    backgroundImage: React.PropTypes.string,
+    iconSource: React.PropTypes.string,
+    opacity: React.PropTypes.number,
+    onPress: React.PropTypes.func
+  },
+
   getInitialState: function () {
     return {
       open: false
