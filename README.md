@@ -6,9 +6,12 @@
 
 
 ```javascript
+import FullSwipeComponent from './FullSwipeComponent.ios'
+
 const listOfItems = [
   {
     title: "Crazy options",
+    source:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/2000px-Tux.svg.png',
     fontSize: 22,
     fontFamily: '',
     backgroundColor: 'pink',
@@ -87,6 +90,7 @@ var FullSwipe = React.createClass({
       fontFamily={item.fontFamily}
       backgroundColor={item.backgroundColor}
       backgroundImage={item.backgroundImage}
+      source={item.source}
       onPress={item.onPress}/>
     ));
     return (
@@ -98,6 +102,25 @@ var FullSwipe = React.createClass({
       </View>
     );
   }
+});
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
 });
 ```
 

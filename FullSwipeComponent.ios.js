@@ -128,6 +128,7 @@ export default React.createClass({
       height,
       onPress,
       fontFamily,
+      source,
       fontSize,
       backgroundColor,
       menuBackgroundColor,
@@ -195,7 +196,7 @@ export default React.createClass({
       }
     }}>
             <View>
-              <Text style={[{fontFamily,fontSize,letterSpacing, opacity: 1}]}>{title}</Text>
+              {source ? (<Image style={[styles.icon, {width: 50, height: height * .8}]} source={{uri:source}} />) : (<Text style={[{fontFamily,fontSize,letterSpacing}]}>{title}</Text>)}
             </View>
           </TouchableOpacity>
         </View>
@@ -231,7 +232,6 @@ var IconComponent = React.createClass({
           <View
             ref={component => this._root = component}
             style={[styles.underMenuItemGroup, {width}]}>
-            {/*<Text style={styles.underMenuItemText}>{item.title}</Text>*/}
             <Text style={[styles.underMenuItemText, {marginTop: height * .4}]}>{title}</Text>
           </View>
         )
@@ -279,6 +279,5 @@ var styles = StyleSheet.create({
   },
   icon: {
     resizeMode: 'contain',
-
   }
 });
