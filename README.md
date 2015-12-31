@@ -76,6 +76,8 @@ const listOfItems = [
   {
     title: "Default Options",
     onPress: () => {console.log("Hello")},
+    backgroundColor: 'lightblue',
+    iconSource: 'http://web.bilecik.edu.tr/murat-ozalp/files/2015/08/GoLang.png',
     menuItems: [
       {
         title: "Facebook",
@@ -118,6 +120,7 @@ var FullSwipe = React.createClass({
       fontSize={item.fontSize}
       fontFamily={item.fontFamily}
       backgroundColor={item.backgroundColor}
+      backgroundImage={item.backgroundImage}
       iconSource={item.iconSource}
       onPress={item.onPress}/>
     ));

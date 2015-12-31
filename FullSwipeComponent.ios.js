@@ -56,10 +56,13 @@ export default React.createClass({
     });
     this.prevLeft = 0;
     this.boxStyle = {
-      left: this.prevLeft,
+      left: this.prevLeft
     };
     this.arrowStyle = {
-      opacity: 0,
+      opacity: 0
+    };
+    this.iconOpacity = {
+      opacity: 1
     };
   },
 
@@ -85,9 +88,7 @@ export default React.createClass({
     this.refs.box.setNativeProps({
       style: this.boxStyle
     });
-    //this.refs.arrow.setNativeProps({
-    //  style: this.arrowStyle
-    //})
+    this.iconOpacity.opacity = this.state.open ? 1 : 0;
   },
 
   handleMove: function (e, gestureState) {
@@ -125,6 +126,7 @@ export default React.createClass({
   render: function () {
     let {
       title,
+      opacity,
       height,
       onPress,
       fontFamily,
@@ -136,6 +138,7 @@ export default React.createClass({
       } = this.props;
 
     height = height || 100;
+    opacity = opacity || 1;
     fontFamily = fontFamily || 'Avenir Next';
     fontSize = fontSize || 17;
     letterSpacing = letterSpacing || 2;
@@ -167,7 +170,7 @@ export default React.createClass({
 
     return (
       //TODO: If you delete one, the one below it becomes 'swiped'. Create an swiped bool value to stop this?
-      <View style={[styles.underMenu, {backgroundColor: menuBackgroundColor}]}>
+      <View style={[styles.underMenu, {backgroundColor: menuBackgroundColor, opacity}]}>
 
         {/*   Container component for menu items UNDER the cover   */}
 
@@ -177,13 +180,13 @@ export default React.createClass({
           return (
             <TouchableOpacity key={it} onPress={item.onPress}
                               style={[styles.viewStyle, styles.underMenuItem, {width: itemWidth, left: distance}]}>
-              <IconComponent width={itemWidth} height={height} icon={item.icon} title={item.title}/>
+              <IconComponent width={itemWidth} height={height} icon={item.icon} title={item.title} opacity={this.iconOpacity.opacity}/>
             </TouchableOpacity>
           )
         })}
         <View
           ref="box"
-          style={[styles.viewStyle, {height, width: window.width}]} {...this.panResponder.panHandlers}>
+          style={[styles.viewStyle, {opacity, height, width: window.width}]} {...this.panResponder.panHandlers}>
           {/*   Container for cover */}
 
           <TouchableOpacity
@@ -195,8 +198,9 @@ export default React.createClass({
         onPress();
       }
     }}>
-            <View>
-              {iconSource ? (<Image style={[styles.icon, {width: 50, height: height * .8}]} source={{uri:iconSource}} />) : (<Text style={[{fontFamily,fontSize,letterSpacing}]}>{title}</Text>)}
+            <View style={[{width: menuWidth, justifyContent: 'center', alignItems: 'center'}]}>
+
+              {iconSource ? (<Image style={[styles.icon, {width: 50, height: height * .8, paddingLeft: menuWidth}]} source={{uri:iconSource}} />) : (<Text style={[{fontFamily,fontSize,letterSpacing, textAlign: 'center'}]}>{title}</Text>)}
             </View>
           </TouchableOpacity>
         </View>
@@ -213,26 +217,28 @@ var IconComponent = React.createClass({
   },
 
   render: function () {
-    const {width, height, icon, title} = this.props;
+    const {width, height, icon, title, opacity} = this.props;
+
+    let thisOpacity = opacity ? 0 : 1;
 
     const checkedTitle = title.length < 14 ? title : 'TRUNCATED';
 
     const layout = (() => {
       if (this.props.icon) {
         return (
-          <View
+          <Image
             ref={component => this._root = component}
-            style={[styles.underMenuItemGroup, {width}]}>
-            <Image style={[styles.icon, {width: 50, height: height * .8}]} source={{uri: icon}}/>
+            style={[styles.underMenuItemGroup, {width, opacity: thisOpacity}]}>
+            <Image style={[styles.icon, {width: 50, height: height * .8, opacity: 1}]} source={{uri: icon}}/>
             <Text style={styles.underMenuItemText}>{checkedTitle}</Text>
-          </View>
+          </Image>
         )
       } else {
         return (
           <View
             ref={component => this._root = component}
-            style={[styles.underMenuItemGroup, {width}]}>
-            <Text style={[styles.underMenuItemText, {marginTop: height * .4}]}>{title}</Text>
+            style={[styles.underMenuItemGroup, {width, opacity: thisOpacity}]}>
+            <Text style={[styles.underMenuItemText, {height, justifyContent: 'center', alignItems: 'center', paddingTop: height * .4}]}>{title}</Text>
           </View>
         )
       }
