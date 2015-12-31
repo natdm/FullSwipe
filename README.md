@@ -2,8 +2,26 @@
 
 ![alt tag](https://raw.githubusercontent.com/natdm/FullSwipe/master/images/FullSwipe_resize.gif)
 
-###Example:
 
+Props:
+
+title               (optional)(string/int)
+iconSource          (optional)(uri)(overrides 'title')
+height              (optional)(int)
+menuItems           (optional)(array of objects (see menuItem props))
+menuBackgroundColor (optional)(int/string)
+fontSize            (optional)(string)
+fontFamily          (optional)(string)
+backgroundColor     (optional)(int/string)
+onPress             (optional)(function)
+
+menuItem props:
+
+title   (optional)(string/int)
+icon    (optional)(uri)
+onPress (optional)(function)
+
+###Example:
 
 ```javascript
 import FullSwipeComponent from './FullSwipeComponent.ios'
