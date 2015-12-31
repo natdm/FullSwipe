@@ -18,6 +18,8 @@
   *  optional int/string
 * fontSize
   *  optional string
+* opacity
+  *  optional int (0 through 1)
 * fontFamily
   *  optional string
 * onPress
