@@ -128,7 +128,7 @@ export default React.createClass({
       height,
       onPress,
       fontFamily,
-      source,
+      iconSource,
       fontSize,
       backgroundColor,
       menuBackgroundColor,
@@ -196,7 +196,7 @@ export default React.createClass({
       }
     }}>
             <View>
-              {source ? (<Image style={[styles.icon, {width: 50, height: height * .8}]} source={{uri:source}} />) : (<Text style={[{fontFamily,fontSize,letterSpacing}]}>{title}</Text>)}
+              {iconSource ? (<Image style={[styles.icon, {width: 50, height: height * .8}]} source={{uri:iconSource}} />) : (<Text style={[{fontFamily,fontSize,letterSpacing}]}>{title}</Text>)}
             </View>
           </TouchableOpacity>
         </View>
