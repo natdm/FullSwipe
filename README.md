@@ -11,7 +11,7 @@ import FullSwipeComponent from './FullSwipeComponent.ios'
 const listOfItems = [
   {
     title: "Crazy options",
-    source:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/2000px-Tux.svg.png',
+    iconSource:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/2000px-Tux.svg.png',
     fontSize: 22,
     fontFamily: '',
     backgroundColor: 'pink',
@@ -90,7 +90,7 @@ var FullSwipe = React.createClass({
       fontFamily={item.fontFamily}
       backgroundColor={item.backgroundColor}
       backgroundImage={item.backgroundImage}
-      source={item.source}
+      iconSource={item.iconSource}
       onPress={item.onPress}/>
     ));
     return (
