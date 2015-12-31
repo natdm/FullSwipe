@@ -46,7 +46,7 @@ export default React.createClass({
   propTypes: {
     title: React.PropTypes.string,
     height: React.PropTypes.number,
-    menuItems: React.PropTypes.array,
+    menuItems: React.PropTypes.arrayOf(React.PropTypes.object),
     menuBackgroundColor: React.PropTypes.string,
     fontSize: React.PropTypes.number,
     fontFamily: React.PropTypes.string,
@@ -55,6 +55,21 @@ export default React.createClass({
     iconSource: React.PropTypes.string,
     opacity: React.PropTypes.number,
     onPress: React.PropTypes.func
+  },
+
+  getDefaultProps: function () {
+    return {
+      height: 100,
+      menuBackgroundColor: '#F2F2F2',
+      fontSize: 17,
+      fontFamily: 'Avenir Next',
+      backgroundColor: '#FFF',
+      letterSpacing: 2,
+      opacity: 1,
+      onPress: function () {
+        console.log("No onPress defined")
+      }
+    }
   },
 
   getInitialState: function () {
@@ -146,17 +161,6 @@ export default React.createClass({
       title,opacity,height,onPress,fontFamily,iconSource,
       fontSize,backgroundColor,menuBackgroundColor,letterSpacing,
       } = this.props;
-
-    height = height || 100;
-    opacity = opacity || 1;
-    fontFamily = fontFamily || 'Avenir Next';
-    fontSize = fontSize || 17;
-    letterSpacing = letterSpacing || 2;
-    backgroundColor = backgroundColor || '#FFF';
-    menuBackgroundColor = menuBackgroundColor || '#F2F2F2';
-    onPress = onPress || function () {
-        console.log("No onPress defined")
-      };
 
     //TODO: BackgroundImage not working. {/*  <Image source={{uri:backgroundImage}} style={[{resizeMode: 'cover'}]}/> */}
     const menuItems = (() => {
