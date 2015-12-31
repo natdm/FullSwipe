@@ -24,11 +24,17 @@
   *  optional string
 * onPress
   *  optional function
+* onSwipeOpenAction
+  *  optional function - preformed on 'open' swipe
+* onSwipeCloseAction
+  *  optional function - preformed on 'close' swipe
 
 ###menuItem props:
 
 * title
   *  optional string/int
+* titleColor
+  * optional string
 * icon
   *  optional uri
 * onPress
@@ -41,91 +47,80 @@ import FullSwipeComponent from './FullSwipeComponent.ios'
 
 const listOfItems = [
   {
-    title: "Crazy options",
-    iconSource: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/2000px-Tux.svg.png',
+    title: "Slide me >>",
     fontSize: 22,
-    backgroundColor: 'pink',
     onPress: () => {
       console.log("Hello")
     },
+    backgroundColor: 'green',
+    menuBackgroundColor: 'pink',
+    onSwipeOpenAction: () => {console.log("Open function ran!")},
+    onSwipeCloseAction: () => {console.log("You swiped close and your function ran")},
     menuItems: [
       {
-        title: "Icons",
+        title: "Open",
         icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/2000px-Tux.svg.png',
         onPress: () => {
           console.log(`Hello from Hello`)
         }
-      },
-      {
-        title: "Or text",
-        onPress: () => {
-          console.log(`Hello from Whats up`)
-        }
-      },
-      {
-        title: "Cover colors",
-        icon: 'https://cdn0.iconfinder.com/data/icons/large-black-icons/512/Windows_window_interface_microsoft.png',
-        onPress: () => {
-          console.log(`Hello from Whats up`)
-        }
-      },
-      {
-        title: "Functions",
-        icon: 'https://lh3.ggpht.com/O0aW5qsyCkR2i7Bu-jUU1b5BWA_NygJ6ui4MgaAvL7gfqvVWqkOBscDaq4pn-vkwByUx=w300',
-        onPress: () => {
-          console.log(`Hello from Whats up`)
-        }
-      },
+      }
     ]
   },
   {
-    title: "Customize almost anything..",
+    title: "Slide me >>",
+    iconSource: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/2000px-Tux.svg.png',
+    fontSize: 22,
     onPress: () => {
       console.log("Hello")
     },
-    //iconSource: 'http://web.bilecik.edu.tr/murat-ozalp/files/2015/08/GoLang.png',
-    opacity: .7,
+    backgroundColor: 'grey',
+    onSwipeOpenAction: () => {console.log("Open function ran!")},
+    onSwipeCloseAction: () => {console.log("You swiped close and your function ran")},
     menuItems: [
       {
-        title: "Opacity",
-        icon: 'http://saqibsomal.com/wp-content/uploads/2015/08/Facebook-icon-5.png',
+        title: "Open",
+        icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/2000px-Tux.svg.png',
         onPress: () => {
           console.log(`Hello from Hello`)
         }
-      },
-      {
-        title: "Font Fam",
-        icon: 'http://saqibsomal.com/wp-content/uploads/2015/08/Facebook-icon-5.png',
-        onPress: () => {
-          console.log(`Hello from Hello`)
-        }
-      },
-      {
-        title: "Spacing",
-        icon: 'http://www.digitalartsonline.co.uk/cmsdata/features/3626921/medium-m-color-688.png',
-        onPress: () => {
-          console.log(`Hello from Whats up`)
-        }
-      },
-      {
-        title: "Font Size",
-        icon: 'https://pbs.twimg.com/profile_images/614583061448036352/CBpFkPaz.png',
-        onPress: () => {
-          console.log("Hello from Linkedin")
-        }
-      },
-
+      }
     ]
   },
   {
-    title: "Just One Item",
-    backgroundColor: 'red',
-    menuBackgroundColor: 'orange',
+    title: "Hello there!",
+    iconSource: 'http://www.pd4pic.com/images/flat-right-arrow-line-theme-action-icon.png',
+    fontSize: 22,
+    opacity: .5,
+    onPress: () => {
+      console.log("Hello from the second one")
+    },
     menuItems: [
       {
-        title: "Or just have one item that takes up all the space.... Maybe have Info or an About me. Still clickable.",
+        title: "Item One",
+        titleColor: 'red',
         onPress: () => {
-          console.log(`Hello from Hello`)
+          console.log(`Hello from item one`)
+        }
+      },
+      {
+        title: "Item Two",
+        titleColor: 'blue',
+        onPress: () => {
+          console.log(`Hello from item two`)
+        }
+      },
+      {
+        title: "Item Three",
+        titleColor: 'green',
+        onPress: () => {
+          console.log(`Hello from item two`)
+        }
+      },
+      {
+        title: "Item Four",
+        titleColor: 'orange',
+        onPress: () => {
+          console.log(`Hello from item two`)
         }
       }
     ]
@@ -147,7 +142,10 @@ var FullSwipe = React.createClass({
         backgroundImage={item.backgroundImage}
         iconSource={item.iconSource}
         opacity={item.opacity}
-        onPress={item.onPress}/>
+        onPress={item.onPress}
+        onSwipeOpenAction={item.onSwipeOpenAction}
+        onSwipeCloseAction={item.onSwipeCloseAction}
+      />
     ));
     return (
       <Image style={styles.container}
@@ -156,7 +154,9 @@ var FullSwipe = React.createClass({
           <Text style={styles.headline}>Example Full Swipe</Text>
         </View>
 
-        {CompiledList}
+        <View style={[{position: 'absolute', bottom: 0}]}>
+          {CompiledList}
+        </View>
       </Image>
     );
   }

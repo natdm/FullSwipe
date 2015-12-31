@@ -54,7 +54,9 @@ export default React.createClass({
     backgroundImage: React.PropTypes.string,
     iconSource: React.PropTypes.string,
     opacity: React.PropTypes.number,
-    onPress: React.PropTypes.func
+    onPress: React.PropTypes.func,
+    onSwipeOpenAction: React.PropTypes.func,
+    onSwipeCloseAction: React.PropTypes.func
   },
 
   getDefaultProps: function () {
@@ -68,6 +70,12 @@ export default React.createClass({
       opacity: 1,
       onPress: function () {
         console.log("No onPress defined")
+      },
+      onSwipeOpenAction: function() {
+        console.log("No onSwipeOpenAction defined")
+      },
+      onSwipeCloseAction: function() {
+        console.log("No onSwipeCloseAction defined")
       }
     }
   },
@@ -114,6 +122,11 @@ export default React.createClass({
     this.boxStyle.left = this.state.open ? menuWidth : 0;
     this.updatePosition();
     this.prevLeft += this.boxStyle.left;
+    if(this.state.open) {
+      this.props.onSwipeOpenAction();
+    } else if (!this.state.open) {
+      this.props.onSwipeCloseAction();
+    }
   },
 
   updatePosition: function () {
@@ -158,7 +171,7 @@ export default React.createClass({
 
   render: function () {
     let {
-      title,opacity,height,onPress,fontFamily,iconSource,
+      title,opacity,height,onPress,onSwipeAction,fontFamily,iconSource,
       fontSize,backgroundColor,menuBackgroundColor,letterSpacing,
       } = this.props;
 
@@ -195,12 +208,14 @@ export default React.createClass({
             let distance = leftDistance();
             //Items under cover
             return (
+              //opacity broken.
               <IconComponent key={it}
                              onPress={item.onPress}
                              itemWidth={itemWidth}
                              height={height}
                              icon={item.icon}
                              title={item.title}
+                             titleColor={item.titleColor}
                              backgroundColor={menuBackgroundColor}
                              opacity={this.iconOpacity.opacity}
                              distance={distance}/>

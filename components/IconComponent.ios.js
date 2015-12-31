@@ -19,12 +19,11 @@ export default React.createClass({
 
   render: function () {
     let {
-      width, height, icon, title, menuBackgroundColor,
-      onPress, itemWidth, distance, opacity
+      width, height, icon, title, titleColor, opacity,
+      onPress, itemWidth, distance, menuBackgroundColor,
       } = this.props;
 
     const thisOpacity = opacity ? 0 : 1;
-
     const checkedTitle = title.length < 14 ? title : 'TRUNCATED';
 
     const component = (() => {
@@ -34,7 +33,7 @@ export default React.createClass({
             ref={component => this._root = component}
             style={[styles.underMenuItemGroup, {width, backgroundColor: menuBackgroundColor, opacity: thisOpacity}]}>
             <Image style={[styles.icon, {width: 50, height: height * .8, opacity: 1}]} source={{uri: icon}}/>
-            <Text style={styles.underMenuItemText}>{checkedTitle}</Text>
+            <Text style={[styles.underMenuItemText, {color: titleColor}]}>{checkedTitle}</Text>
           </Image>
         )
       } else {
@@ -43,7 +42,7 @@ export default React.createClass({
             ref={component => this._root = component}
             style={[styles.underMenuItemGroup, {width, opacity: thisOpacity}]}>
             <Text
-              style={[styles.underMenuItemText, {height, justifyContent: 'center', alignItems: 'center', paddingTop: height * .4}]}>{title}</Text>
+              style={[styles.underMenuItemText, {color: titleColor, height, paddingTop: height * .4}]}>{title}</Text>
           </View>
         )
       }
@@ -76,7 +75,7 @@ let styles = StyleSheet.create({
   },
   underMenuItemText: {
     textAlign: 'center',
-    flex: 1
+    flex: 1,
   },
   underMenuItemGroup: {
     justifyContent: 'center',
