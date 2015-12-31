@@ -42,97 +42,120 @@ import FullSwipeComponent from './FullSwipeComponent.ios'
 const listOfItems = [
   {
     title: "Crazy options",
-    iconSource:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/2000px-Tux.svg.png',
+    iconSource: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/2000px-Tux.svg.png',
     fontSize: 22,
-    fontFamily: '',
     backgroundColor: 'pink',
-    onPress: () => {console.log("Hello")},
+    onPress: () => {
+      console.log("Hello")
+    },
     menuItems: [
       {
-        title: "Linux",
+        title: "Icons",
         icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/2000px-Tux.svg.png',
-        onPress: () => {console.log(`Hello from Hello`)}
+        onPress: () => {
+          console.log(`Hello from Hello`)
+        }
       },
       {
-        title: "OS X!",
-        icon: 'http://www.clipartbest.com/cliparts/KTj/e86/KTje86yAc.png',
-        onPress: () => {console.log(`Hello from Whats up`)}
+        title: "Or text",
+        onPress: () => {
+          console.log(`Hello from Whats up`)
+        }
       },
       {
-        title: "Windows",
+        title: "Cover colors",
         icon: 'https://cdn0.iconfinder.com/data/icons/large-black-icons/512/Windows_window_interface_microsoft.png',
-        onPress: () => {console.log(`Hello from Whats up`)}
+        onPress: () => {
+          console.log(`Hello from Whats up`)
+        }
       },
       {
-        title: "Unix",
-        icon: 'http://megaicons.net/static/img/icons_sizes/8/178/512/operating-sysytems-unix-icon.png',
-        onPress: () => {console.log(`Hello from Whats up`)}
-      },
-      {
-        title: "Chromebook",
+        title: "Functions",
         icon: 'https://lh3.ggpht.com/O0aW5qsyCkR2i7Bu-jUU1b5BWA_NygJ6ui4MgaAvL7gfqvVWqkOBscDaq4pn-vkwByUx=w300',
-        onPress: () => {console.log(`Hello from Whats up`)}
+        onPress: () => {
+          console.log(`Hello from Whats up`)
+        }
       },
     ]
   },
   {
-    title: "Default Options",
-    onPress: () => {console.log("Hello")},
-    backgroundColor: 'lightblue',
-    iconSource: 'http://web.bilecik.edu.tr/murat-ozalp/files/2015/08/GoLang.png',
-    opacity: .9,
+    title: "Customize almost anything..",
+    onPress: () => {
+      console.log("Hello")
+    },
+    //iconSource: 'http://web.bilecik.edu.tr/murat-ozalp/files/2015/08/GoLang.png',
+    opacity: .7,
     menuItems: [
       {
-        title: "Facebook",
+        title: "Opacity",
         icon: 'http://saqibsomal.com/wp-content/uploads/2015/08/Facebook-icon-5.png',
-        onPress: () => {console.log(`Hello from Hello`)}
+        onPress: () => {
+          console.log(`Hello from Hello`)
+        }
       },
       {
-        title: "Medium",
+        title: "Font Fam",
+        icon: 'http://saqibsomal.com/wp-content/uploads/2015/08/Facebook-icon-5.png',
+        onPress: () => {
+          console.log(`Hello from Hello`)
+        }
+      },
+      {
+        title: "Spacing",
         icon: 'http://www.digitalartsonline.co.uk/cmsdata/features/3626921/medium-m-color-688.png',
-        onPress: () => {console.log(`Hello from Whats up`)}
+        onPress: () => {
+          console.log(`Hello from Whats up`)
+        }
       },
       {
-        title: "LinkedIn",
+        title: "Font Size",
         icon: 'https://pbs.twimg.com/profile_images/614583061448036352/CBpFkPaz.png',
-        onPress: () => {console.log("Hello from Linkedin")}
+        onPress: () => {
+          console.log("Hello from Linkedin")
+        }
       },
 
     ]
   },
   {
     title: "Just One Item",
+    backgroundColor: 'red',
+    menuBackgroundColor: 'orange',
     menuItems: [
       {
-        title: "Something else",
-        onPress: () => {console.log(`Hello from Hello`)}
+        title: "Or just have one item that takes up all the space.... Maybe have Info or an About me. Still clickable.",
+        onPress: () => {
+          console.log(`Hello from Hello`)
+        }
       }
     ]
   }
 ];
 
 var FullSwipe = React.createClass({
-  render: function() {
+  render: function () {
     const CompiledList = listOfItems.map((item, it) => (
-    <FullSwipeComponent
-      key={it}
-      title={item.title}
-      height={item.height}
-      menuItems={item.menuItems}
-      menuBackgroundColor={item.menuBackgroundColor}
-      fontSize={item.fontSize}
-      fontFamily={item.fontFamily}
-      backgroundColor={item.backgroundColor}
-      backgroundImage={item.backgroundImage}
-      iconSource={item.iconSource}
-      opacity={item.opacity}
-      onPress={item.onPress}/>
+      <FullSwipeComponent
+        key={it}
+        title={item.title}
+        height={item.height}
+        menuItems={item.menuItems}
+        menuBackgroundColor={item.menuBackgroundColor}
+        fontSize={item.fontSize}
+        fontFamily={item.fontFamily}
+        backgroundColor={item.backgroundColor}
+        backgroundImage={item.backgroundImage}
+        iconSource={item.iconSource}
+        opacity={item.opacity}
+        onPress={item.onPress}/>
     ));
     return (
-      <Image style={styles.container} source={{uri:'http://static3.depositphotos.com/1000189/134/i/950/depositphotos_1340581-Green-Grass-Background.jpg'}}>
-        <Text style={styles.welcome}>
-          Example Full Swipe
-        </Text>
+      <Image style={styles.container}
+             source={{uri:'http://static3.depositphotos.com/1000189/134/i/950/depositphotos_1340581-Green-Grass-Background.jpg'}}>
+        <View style={styles.backdropView}>
+          <Text style={styles.headline}>Example Full Swipe</Text>
+        </View>
+
         {CompiledList}
       </Image>
     );
@@ -157,6 +180,24 @@ var styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  backdrop: {
+    paddingTop: 60,
+    width: 320,
+    height: 120
+  },
+  backdropView: {
+    height: 120,
+    width: 320,
+    backgroundColor: 'rgba(0,0,0,0)',
+  },
+  headline: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    fontFamily: 'Avenir Next',
+    textAlign: 'center',
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white'
+  }
 });
 ```
 

@@ -144,7 +144,9 @@ export default React.createClass({
     letterSpacing = letterSpacing || 2;
     backgroundColor = backgroundColor || '#FFF';
     menuBackgroundColor = menuBackgroundColor || '#F2F2F2';
-    onPress = onPress || function () {console.log("No onPress defined")};
+    onPress = onPress || function () {
+        console.log("No onPress defined")
+      };
 
     //TODO: BackgroundImage not working. {/*  <Image source={{uri:backgroundImage}} style={[{resizeMode: 'cover'}]}/> */}
     const menuItems = (() => {
@@ -181,10 +183,11 @@ export default React.createClass({
           return (
             <TouchableOpacity key={it} onPress={item.onPress}
                               style={[styles.viewStyle, styles.underMenuItem, {width: itemWidth, left: distance}]}>
-              <IconComponent width={itemWidth} height={height} icon={item.icon} title={item.title} opacity={this.iconOpacity.opacity}/>
+              <IconComponent width={itemWidth} height={height} icon={item.icon} title={item.title} backgroundColor={menuBackgroundColor}
+                             opacity={this.iconOpacity.opacity}/>
             </TouchableOpacity>
-          )
-        })}
+          )}
+        )}
         <View
           ref="box"
           style={[styles.viewStyle, {opacity, height, width: window.width}]} {...this.panResponder.panHandlers}>
@@ -201,7 +204,9 @@ export default React.createClass({
     }}>
             <View style={[{width: menuWidth, justifyContent: 'center', alignItems: 'center'}]}>
 
-              {iconSource ? (<Image style={[styles.icon, {width: 50, height: height * .8, paddingLeft: menuWidth}]} source={{uri:iconSource}} />) : (<Text style={[{fontFamily,fontSize,letterSpacing, textAlign: 'center'}]}>{title}</Text>)}
+              {iconSource ? (<Image style={[styles.icon, {width: 50, height: height * .8, paddingLeft: menuWidth}]}
+                                    source={{uri:iconSource}}/>) : (
+                <Text style={[{fontFamily,fontSize,letterSpacing, textAlign: 'center'}]}>{title}</Text>)}
             </View>
           </TouchableOpacity>
         </View>
@@ -218,18 +223,18 @@ var IconComponent = React.createClass({
   },
 
   render: function () {
-    const {width, height, icon, title, opacity} = this.props;
+    const {width, height, icon, title, opacity, menuBackgroundColor} = this.props;
 
     let thisOpacity = opacity ? 0 : 1;
 
     const checkedTitle = title.length < 14 ? title : 'TRUNCATED';
 
-    const layout = (() => {
+    return (() => {
       if (this.props.icon) {
         return (
           <Image
             ref={component => this._root = component}
-            style={[styles.underMenuItemGroup, {width, opacity: thisOpacity}]}>
+            style={[styles.underMenuItemGroup, {width, backgroundColor: menuBackgroundColor, opacity: thisOpacity}]}>
             <Image style={[styles.icon, {width: 50, height: height * .8, opacity: 1}]} source={{uri: icon}}/>
             <Text style={styles.underMenuItemText}>{checkedTitle}</Text>
           </Image>
@@ -239,12 +244,12 @@ var IconComponent = React.createClass({
           <View
             ref={component => this._root = component}
             style={[styles.underMenuItemGroup, {width, opacity: thisOpacity}]}>
-            <Text style={[styles.underMenuItemText, {height, justifyContent: 'center', alignItems: 'center', paddingTop: height * .4}]}>{title}</Text>
+            <Text
+              style={[styles.underMenuItemText, {height, justifyContent: 'center', alignItems: 'center', paddingTop: height * .4}]}>{title}</Text>
           </View>
         )
       }
     })();
-    return layout;
   }
 });
 
