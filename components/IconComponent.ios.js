@@ -12,15 +12,46 @@ let {
 
 export default React.createClass({
 
+  propTypes: {
+    title: React.PropTypes.string,
+    height: React.PropTypes.number,
+    menuItems: React.PropTypes.arrayOf(React.PropTypes.object),
+    fontSize: React.PropTypes.number,
+    fontFamily: React.PropTypes.string,
+    fontWeight: React.PropTypes.string,
+    backgroundColor: React.PropTypes.string,
+    backgroundImage: React.PropTypes.string,
+    iconSource: React.PropTypes.string,
+    opacity: React.PropTypes.number,
+    onPress: React.PropTypes.func,
+    onSwipeOpenAction: React.PropTypes.func,
+    onSwipeCloseAction: React.PropTypes.func
+  },
+  //width, height, icon, title, titleColor, opacity,
+  //onPress, itemWidth, distance, menuBackgroundColor,
+
+  getDefaultProps: function () {
+    return {
+      title: '',
+      opacity: 1,
+      onPress: () => {
+        console.log("onPress pressed!");
+      }
+    }
+  },
+
   setNativeProps: function (nativeProps) {
     //This is needed to use a component within a touchable component. Using it in IconComponent
     this._root.setNativeProps(nativeProps);
   },
 
+
   render: function () {
     let {
-      width, height, icon, title, titleColor, opacity,
-      onPress, itemWidth, distance, menuBackgroundColor,
+      width, height, icon, title, titleColor,
+      onPress, itemWidth, distance, opacity,
+      borderTopLeftRadius, borderBottomLeftRadius,
+      borderTopRightRadius, borderBottomRightRadius
       } = this.props;
 
     const thisOpacity = opacity ? 0 : 1;
@@ -31,7 +62,7 @@ export default React.createClass({
         return (
           <Image
             ref={component => this._root = component}
-            style={[styles.underMenuItemGroup, {width, backgroundColor: menuBackgroundColor, opacity: thisOpacity}]}>
+            style={[styles.underMenuItemGroup, {width, opacity: thisOpacity}]}>
             <Image style={[styles.icon, {width: 50, height: height * .8, opacity: 1}]} source={{uri: icon}}/>
             <Text style={[styles.underMenuItemText, {color: titleColor}]}>{checkedTitle}</Text>
           </Image>
@@ -50,7 +81,7 @@ export default React.createClass({
 
     return (
       <TouchableOpacity onPress={onPress}
-                        style={[styles.viewStyle, styles.underMenuItem, {width: itemWidth, left: distance}]}>
+                        style={[styles.viewStyle, styles.underMenuItem, {borderTopRightRadius, borderBottomRightRadius, borderTopLeftRadius, borderBottomLeftRadius, width: itemWidth, left: distance,}]}>
         {component}
       </TouchableOpacity>
     )

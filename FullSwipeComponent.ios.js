@@ -50,13 +50,16 @@ export default React.createClass({
     menuBackgroundColor: React.PropTypes.string,
     fontSize: React.PropTypes.number,
     fontFamily: React.PropTypes.string,
+    fontWeight: React.PropTypes.string,
     backgroundColor: React.PropTypes.string,
     backgroundImage: React.PropTypes.string,
     iconSource: React.PropTypes.string,
     opacity: React.PropTypes.number,
+    borderRadiusLeft: React.PropTypes.number,
+    borderRadiusRight: React.PropTypes.number,
     onPress: React.PropTypes.func,
     onSwipeOpenAction: React.PropTypes.func,
-    onSwipeCloseAction: React.PropTypes.func
+    onSwipeCloseAction: React.PropTypes.func,
   },
 
   getDefaultProps: function () {
@@ -66,6 +69,8 @@ export default React.createClass({
       fontSize: 17,
       fontFamily: 'Avenir Next',
       backgroundColor: '#FFF',
+      borderRadiusLeft: 0,
+      borderRadiusRight: 0,
       letterSpacing: 2,
       opacity: 1,
       onPress: function () {
@@ -171,9 +176,14 @@ export default React.createClass({
 
   render: function () {
     let {
-      title,opacity,height,onPress,onSwipeAction,fontFamily,iconSource,
-      fontSize,backgroundColor,menuBackgroundColor,letterSpacing,
+      title,opacity,height,onPress,fontFamily,iconSource,
+      fontSize,backgroundColor,menuBackgroundColor,letterSpacing, fontWeight,
+      borderRadiusLeft, borderRadiusRight,
       } = this.props;
+    const borderTopLeftRadius = borderRadiusLeft;
+    const borderBottomLeftRadius = borderRadiusLeft;
+    const borderTopRightRadius = borderRadiusRight;
+    const borderBottomRightRadius = borderRadiusRight;
 
     //TODO: BackgroundImage not working. {/*  <Image source={{uri:backgroundImage}} style={[{resizeMode: 'cover'}]}/> */}
     const menuItems = (() => {
@@ -200,7 +210,7 @@ export default React.createClass({
 
     return (
       //TODO: If you delete one, the one below it becomes 'swiped'. Create an swiped bool value to stop this?
-      <View style={[styles.underMenu, {backgroundColor: menuBackgroundColor, opacity: thisOpacity, }]}>
+      <View style={[styles.underMenu, {backgroundColor: menuBackgroundColor, opacity: thisOpacity, borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius}]}>
 
         {/*   Container component for menu items UNDER the cover   */}
 
@@ -218,16 +228,21 @@ export default React.createClass({
                              titleColor={item.titleColor}
                              backgroundColor={menuBackgroundColor}
                              opacity={this.iconOpacity.opacity}
-                             distance={distance}/>
+                             distance={distance}
+                             borderTopLeftRadius={borderTopLeftRadius}
+                             borderBottomLeftRadius={borderBottomLeftRadius}
+                             borderTopRightRadius={borderTopRightRadius}
+                             borderBottomRightRadius={borderBottomRightRadius}
+              />
             )
           }
         )}
         <View ref="box"
-              style={[styles.viewStyle, {opacity, height, width: window.width}]} {...this.panResponder.panHandlers}>
+              style={[styles.viewStyle, {opacity, height, borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius, width: window.width, backgroundColor}]} {...this.panResponder.panHandlers}>
           {/*   Container for cover */}
 
           <TouchableOpacity
-            style={[styles.viewStyle, styles.menuClickable,{height, backgroundColor}]}
+            style={[styles.viewStyle, styles.menuClickable,{height, borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius}]}
             onPress={() => {
               if(this.state.open) {
                 console.log("State open");
@@ -236,10 +251,10 @@ export default React.createClass({
               }
             }}>
 
-            <View style={[{width: menuWidth, justifyContent: 'center', alignItems: 'center'}]}>
+            <View style={[{width: menuWidth, justifyContent: 'center', alignItems: 'center', borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius}]}>
               {iconSource ? (<Image style={[styles.icon, {width: 50, height: height * .8, paddingLeft: menuWidth}]}
                                     source={{uri:iconSource}}/>) : (
-                <Text style={[{fontFamily,fontSize,letterSpacing, textAlign: 'center'}]}>{title}</Text>)}
+                <Text style={[{fontFamily, fontWeight, fontSize,letterSpacing, textAlign: 'center'}]}>{title}</Text>)}
             </View>
 
           </TouchableOpacity>

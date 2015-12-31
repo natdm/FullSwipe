@@ -22,6 +22,10 @@
   *  optional int (0 through 1)
 * fontFamily
   *  optional string
+* borderRadiusRight
+  * optional string
+* borderRadiusLeft
+  * optional string
 * onPress
   *  optional function
 * onSwipeOpenAction
