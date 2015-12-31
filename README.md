@@ -106,7 +106,6 @@ var FullSwipe = React.createClass({
       fontSize={item.fontSize}
       fontFamily={item.fontFamily}
       backgroundColor={item.backgroundColor}
-      backgroundImage={item.backgroundImage}
       iconSource={item.iconSource}
       onPress={item.onPress}/>
     ));
