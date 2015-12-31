@@ -4,22 +4,21 @@
 
 
 Props:
-
-title               (optional)(string/int)
-iconSource          (optional)(uri)(overrides 'title')
-height              (optional)(int)
-menuItems           (optional)(array of objects (see menuItem props))
-menuBackgroundColor (optional)(int/string)
-fontSize            (optional)(string)
-fontFamily          (optional)(string)
-backgroundColor     (optional)(int/string)
-onPress             (optional)(function)
+* title               (optional)(string/int)
+* iconSource          (optional)(uri)(overrides 'title')
+* height              (optional)(int)
+* menuItems           (optional)(array of objects (see menuItem props))
+* menuBackgroundColor (optional)(int/string)
+* fontSize            (optional)(string)
+* fontFamily          (optional)(string)
+* backgroundColor     (optional)(int/string)
+* onPress             (optional)(function)
 
 menuItem props:
 
-title   (optional)(string/int)
-icon    (optional)(uri)
-onPress (optional)(function)
+* title   (optional)(string/int)
+* icon    (optional)(uri)
+* onPress (optional)(function)
 
 ###Example:
 
