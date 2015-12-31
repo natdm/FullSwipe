@@ -1,8 +1,8 @@
 'use strict';
-var Dimensions = require('Dimensions');
-var window = Dimensions.get('window');
-var React = require('react-native');
-var {
+let Dimensions = require('Dimensions');
+let window = Dimensions.get('window');
+let React = require('react-native');
+let {
   StyleSheet,
   View,
   PanResponder,
@@ -32,11 +32,14 @@ var {
 
  TODO: for cover: add  backgroundImage
  TODO: Add unit tests
+ TODO: Optimize for horizontal view.
  */
 
 let menuWidth = window.width * .9;
 let forceMin = menuWidth * .6;
 let forceMinClose = menuWidth * .3;
+
+import IconComponent from './components/IconComponent.ios'
 
 export default React.createClass({
   getInitialState: function () {
@@ -93,7 +96,7 @@ export default React.createClass({
 
   handleMove: function (e, gestureState) {
 
-    var panningRight = gestureState.dx > 10;
+    let panningRight = gestureState.dx > 10;
     if (panningRight && this.state.open) {
       return;
     }
@@ -105,7 +108,7 @@ export default React.createClass({
       //If opening
       this.boxStyle.left = this.prevLeft + gestureState.dx;
       if (Math.abs(gestureState.dx) > forceMin) {
-        var open = !this.state.open;
+        let open = !this.state.open;
         this.setState({open});
         this.boxStyle.left = open ? menuWidth : 0;
         //this.arrowStyle.opacity = open ? 1 : 0;
@@ -115,7 +118,7 @@ export default React.createClass({
     //If closing
     if (Math.abs(gestureState.dx) > forceMinClose) {
       this.boxStyle.left = this.prevLeft + gestureState.dx;
-      var open = !this.state.open;
+      let open = !this.state.open;
       this.setState({open});
       this.boxStyle.left = open ? menuWidth : 0;
       //this.arrowStyle.opacity = open ? 1 : 0;
@@ -125,16 +128,8 @@ export default React.createClass({
 
   render: function () {
     let {
-      title,
-      opacity,
-      height,
-      onPress,
-      fontFamily,
-      iconSource,
-      fontSize,
-      backgroundColor,
-      menuBackgroundColor,
-      letterSpacing,
+      title,opacity,height,onPress,fontFamily,iconSource,
+      fontSize,backgroundColor,menuBackgroundColor,letterSpacing,
       } = this.props;
 
     height = height || 100;
@@ -162,7 +157,7 @@ export default React.createClass({
     let itemWidth = menuWidth / menuItems.length;
 
     function getDistance(width) {
-      var i = 0;
+      let i = 0;
       return function () {
         return width * i++
       }
@@ -173,106 +168,59 @@ export default React.createClass({
 
     return (
       //TODO: If you delete one, the one below it becomes 'swiped'. Create an swiped bool value to stop this?
-      <View style={[styles.underMenu, {backgroundColor: menuBackgroundColor, opacity: thisOpacity}]}>
+      <View style={[styles.underMenu, {backgroundColor: menuBackgroundColor, opacity: thisOpacity, }]}>
 
         {/*   Container component for menu items UNDER the cover   */}
 
         { menuItems.map((item, it) => {
-          let distance = leftDistance();
-          //Items under cover
-          return (
-            <TouchableOpacity key={it} onPress={item.onPress}
-                              style={[styles.viewStyle, styles.underMenuItem, {width: itemWidth, left: distance}]}>
-              <IconComponent width={itemWidth} height={height} icon={item.icon} title={item.title} backgroundColor={menuBackgroundColor}
-                             opacity={this.iconOpacity.opacity}/>
-            </TouchableOpacity>
-          )}
+            let distance = leftDistance();
+            //Items under cover
+            return (
+              <IconComponent key={it}
+                             onPress={item.onPress}
+                             itemWidth={itemWidth}
+                             height={height}
+                             icon={item.icon}
+                             title={item.title}
+                             backgroundColor={menuBackgroundColor}
+                             opacity={this.iconOpacity.opacity}
+                             distance={distance}/>
+            )
+          }
         )}
-        <View
-          ref="box"
-          style={[styles.viewStyle, {opacity, height, width: window.width}]} {...this.panResponder.panHandlers}>
+        <View ref="box"
+              style={[styles.viewStyle, {opacity, height, width: window.width}]} {...this.panResponder.panHandlers}>
           {/*   Container for cover */}
 
           <TouchableOpacity
-            style={[styles.viewStyle,styles.menuClickable,{height, backgroundColor}]}
+            style={[styles.viewStyle, styles.menuClickable,{height, backgroundColor}]}
             onPress={() => {
-      if(this.state.open) {
-        console.log("State open");
-      } else if (!this.state.open) {
-        onPress();
-      }
-    }}>
-            <View style={[{width: menuWidth, justifyContent: 'center', alignItems: 'center'}]}>
+              if(this.state.open) {
+                console.log("State open");
+              } else if (!this.state.open) {
+                onPress();
+              }
+            }}>
 
+            <View style={[{width: menuWidth, justifyContent: 'center', alignItems: 'center'}]}>
               {iconSource ? (<Image style={[styles.icon, {width: 50, height: height * .8, paddingLeft: menuWidth}]}
                                     source={{uri:iconSource}}/>) : (
                 <Text style={[{fontFamily,fontSize,letterSpacing, textAlign: 'center'}]}>{title}</Text>)}
             </View>
+
           </TouchableOpacity>
+
         </View>
       </View>
     );
   }
 });
 
-var IconComponent = React.createClass({
 
-  setNativeProps: function (nativeProps) {
-    //This is needed to use a component within a touchable component. Using it in IconComponent
-    this._root.setNativeProps(nativeProps);
-  },
-
-  render: function () {
-    const {width, height, icon, title, opacity, menuBackgroundColor} = this.props;
-
-    let thisOpacity = opacity ? 0 : 1;
-
-    const checkedTitle = title.length < 14 ? title : 'TRUNCATED';
-
-    return (() => {
-      if (this.props.icon) {
-        return (
-          <Image
-            ref={component => this._root = component}
-            style={[styles.underMenuItemGroup, {width, backgroundColor: menuBackgroundColor, opacity: thisOpacity}]}>
-            <Image style={[styles.icon, {width: 50, height: height * .8, opacity: 1}]} source={{uri: icon}}/>
-            <Text style={styles.underMenuItemText}>{checkedTitle}</Text>
-          </Image>
-        )
-      } else {
-        return (
-          <View
-            ref={component => this._root = component}
-            style={[styles.underMenuItemGroup, {width, opacity: thisOpacity}]}>
-            <Text
-              style={[styles.underMenuItemText, {height, justifyContent: 'center', alignItems: 'center', paddingTop: height * .4}]}>{title}</Text>
-          </View>
-        )
-      }
-    })();
-  }
-});
-
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
   viewStyle: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  underMenu: {
-    flexDirection: 'row',
-  },
-  underMenuItem: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-  },
-  underMenuItemText: {
-    textAlign: 'center',
-    flex: 1
-  },
-  underMenuItemGroup: {
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -281,15 +229,10 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  leftArrow: {
-    flex: 1,
-    resizeMode: 'contain',
-    position: 'absolute',
-    left: 1,
-    height: 189 / 5,
-    width: 98 / 5
-  },
   icon: {
     resizeMode: 'contain',
+  },
+  underMenu: {
+    flexDirection: 'row',
   }
 });
