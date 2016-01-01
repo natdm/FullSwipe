@@ -206,3 +206,5 @@ var styles = StyleSheet.create({
 ```
 
 TODO: Unit tests and background image
+
+.
