@@ -17,18 +17,16 @@ export default React.createClass({
     height: React.PropTypes.number,
     menuItems: React.PropTypes.arrayOf(React.PropTypes.object),
     fontSize: React.PropTypes.number,
+    opacity: React.PropTypes.number,
     fontFamily: React.PropTypes.string,
     fontWeight: React.PropTypes.string,
     backgroundColor: React.PropTypes.string,
     backgroundImage: React.PropTypes.string,
     iconSource: React.PropTypes.string,
-    opacity: React.PropTypes.number,
     onPress: React.PropTypes.func,
     onSwipeOpenAction: React.PropTypes.func,
     onSwipeCloseAction: React.PropTypes.func
   },
-  //width, height, icon, title, titleColor, opacity,
-  //onPress, itemWidth, distance, menuBackgroundColor,
 
   getDefaultProps: function () {
     return {
@@ -54,7 +52,6 @@ export default React.createClass({
       borderTopRightRadius, borderBottomRightRadius
       } = this.props;
 
-    const thisOpacity = opacity ? 0 : 1;
     const checkedTitle = title.length < 14 ? title : 'TRUNCATED';
 
     const component = (() => {
@@ -62,29 +59,30 @@ export default React.createClass({
         return (
           <Image
             ref={component => this._root = component}
-            style={[styles.underMenuItemGroup, {width, opacity: thisOpacity}]}>
-            <Image style={[styles.icon, {width: 50, height: height * .8, opacity: 1}]} source={{uri: icon}}/>
-            <Text style={[styles.underMenuItemText, {color: titleColor}]}>{checkedTitle}</Text>
+            style={[styles.underMenuItemGroup, {width, opacity}]}>
+            <Image style={[styles.icon, {width: 50, opacity, height: height * .8}]} source={{uri: icon}}/>
+            <Text style={[styles.underMenuItemText, {opacity, color: titleColor}]}>{checkedTitle}</Text>
           </Image>
         )
       } else {
         return (
           <View
             ref={component => this._root = component}
-            style={[styles.underMenuItemGroup, {width, opacity: thisOpacity}]}>
+            style={[styles.underMenuItemGroup, {width, opacity}]}>
             <Text
-              style={[styles.underMenuItemText, {color: titleColor, height, paddingTop: height * .4}]}>{title}</Text>
+              style={[styles.underMenuItemText, {color: titleColor, height, opacity, paddingTop: height * .4}]}>{title}</Text>
           </View>
         )
       }
     })();
 
-    return (
+    var button = this.props.open ? (
       <TouchableOpacity onPress={onPress}
-                        style={[styles.viewStyle, styles.underMenuItem, {borderTopRightRadius, borderBottomRightRadius, borderTopLeftRadius, borderBottomLeftRadius, width: itemWidth, left: distance,}]}>
-        {component}
-      </TouchableOpacity>
-    )
+                        style={[styles.viewStyle, styles.underMenuItem, {opacity, borderTopRightRadius, borderBottomRightRadius, borderTopLeftRadius, borderBottomLeftRadius, width: itemWidth, left: distance,}]}>
+      {component}
+    </TouchableOpacity>) : null;
+
+    return <View style={[{opacity}]}>{button}</View>;
   }
 });
 

@@ -71,8 +71,8 @@ export default React.createClass({
       backgroundColor: '#FFF',
       borderRadiusLeft: 0,
       borderRadiusRight: 0,
-      letterSpacing: 2,
       opacity: 1,
+      letterSpacing: 2,
       onPress: function () {
         console.log("No onPress defined")
       },
@@ -104,12 +104,6 @@ export default React.createClass({
     this.boxStyle = {
       left: this.prevLeft
     };
-    this.arrowStyle = {
-      opacity: 0
-    };
-    this.iconOpacity = {
-      opacity: 1
-    };
   },
 
   componentDidMount: function () {
@@ -139,7 +133,7 @@ export default React.createClass({
     this.refs.box.setNativeProps({
       style: this.boxStyle
     });
-    this.iconOpacity.opacity = this.state.open ? 1 : 0;
+    console.log(`Open: ${this.state.open}`);
   },
 
   handleMove: function (e, gestureState) {
@@ -218,7 +212,6 @@ export default React.createClass({
             let distance = leftDistance();
             //Items under cover
             return (
-              //opacity broken.
               <IconComponent key={it}
                              onPress={item.onPress}
                              itemWidth={itemWidth}
@@ -227,12 +220,12 @@ export default React.createClass({
                              title={item.title}
                              titleColor={item.titleColor}
                              backgroundColor={menuBackgroundColor}
-                             opacity={this.iconOpacity.opacity}
                              distance={distance}
                              borderTopLeftRadius={borderTopLeftRadius}
                              borderBottomLeftRadius={borderBottomLeftRadius}
                              borderTopRightRadius={borderTopRightRadius}
                              borderBottomRightRadius={borderBottomRightRadius}
+                             open={this.state.open}
               />
             )
           }
@@ -242,17 +235,15 @@ export default React.createClass({
           {/*   Container for cover */}
 
           <TouchableOpacity
-            style={[styles.viewStyle, styles.menuClickable,{height, borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius}]}
+            style={[styles.viewStyle, styles.menuClickable,{opacity, height, borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius}]}
             onPress={() => {
-              if(this.state.open) {
-                console.log("State open");
-              } else if (!this.state.open) {
+              if (!this.state.open) {
                 onPress();
               }
             }}>
 
-            <View style={[{width: menuWidth, justifyContent: 'center', alignItems: 'center', borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius}]}>
-              {iconSource ? (<Image style={[styles.icon, {width: 50, height: height * .8, paddingLeft: menuWidth}]}
+            <View style={[{width: menuWidth, justifyContent: 'center', alignItems: 'center', borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius, opacity}]}>
+              {iconSource ? (<Image style={[styles.icon, {opacity, width: 50, height: height * .8, paddingLeft: menuWidth}]}
                                     source={{uri:iconSource}}/>) : (
                 <Text style={[{fontFamily, fontWeight, fontSize,letterSpacing, textAlign: 'center'}]}>{title}</Text>)}
             </View>
