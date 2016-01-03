@@ -39,6 +39,8 @@ let menuWidth = window.width * .9;
 let forceMin = menuWidth * .6;
 let forceMinClose = menuWidth * .3;
 
+let lastState = false;
+
 import IconComponent from './components/IconComponent.ios'
 
 export default React.createClass({
@@ -119,11 +121,6 @@ export default React.createClass({
     this.boxStyle.left = this.state.open ? menuWidth : 0;
     this.updatePosition();
     this.prevLeft += this.boxStyle.left;
-    if(this.state.open) {
-      this.props.onSwipeOpenAction();
-    } else if (!this.state.open) {
-      this.props.onSwipeCloseAction();
-    }
   },
 
   updatePosition: function () {
@@ -162,6 +159,16 @@ export default React.createClass({
       this.boxStyle.left = open ? menuWidth : 0;
     }
     this.updatePosition();
+
+    //This is to make sure the onSwipeOpen and onSwipeClose actions run
+    // when you've encountered a FULL swipe, not partial.
+    if(this.state.open && lastState != this.state.open) {
+      this.props.onSwipeOpenAction();
+      lastState = !lastState
+    } else if (!this.state.open && lastState === true) {
+      this.props.onSwipeCloseAction();
+      lastState = !lastState
+    }
   },
 
   render: function () {
