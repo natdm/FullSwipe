@@ -13,13 +13,11 @@
 * backgroundColor
   *  optional int/string
 * menuItems
-  *  optional array of objects (see menuItem props)
+  *  optional array of objects (see menuItem props) (use rgba for opacity)
 * menuBackgroundColor
-  *  optional int/string
+  *  optional int/string (use rgba for opacity)
 * fontSize
   *  optional string
-* opacity
-  *  optional int (0 through 1)
 * fontFamily
   *  optional string
 * borderRadiusRight
@@ -47,23 +45,52 @@
 ###Example:
 
 ```javascript
-import FullSwipeComponent from './FullSwipeComponent.ios'
+import FullSwipeComponent from './FullSwipe/FullSwipeComponent.ios'
+
+const wallpaper = 'http://wallpaper.pickywallpapers.com/1280x1024/clean-blurry.jpg';
+const reactIcon = 'http://frostney.github.io/talks/react-native/slides/images/react-logo.png';
+const gitIcon = 'https://fleep.io/blog/wp-content/uploads/2014/07/github_icon.png';
 
 const listOfItems = [
   {
-    title: "Slide me >>",
-    fontSize: 22,
+    iconSource: gitIcon,
+    alignIconLeft: true,
+    title: "Hello",
+    fontSize: 45,
+    borderRadiusLeft: 55,
+    backgroundColor: 'rgba(255,255,255,.5)',
+    menuBackgroundColor: 'rgba(255,255,255,.2)',
+    fontFamily: 'Verdana',
     onPress: () => {
       console.log("Hello")
     },
-    backgroundColor: 'green',
-    menuBackgroundColor: 'pink',
-    onSwipeOpenAction: () => {console.log("Open function ran!")},
-    onSwipeCloseAction: () => {console.log("You swiped close and your function ran")},
+    onSwipeOpenAction: () => {
+      console.log("Open function ran!")
+    },
+    onSwipeCloseAction: () => {
+      console.log("You swiped close and your function ran")
+    },
     menuItems: [
       {
-        title: "Open",
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/2000px-Tux.svg.png',
+        onPress: () => {
+          console.log(`Hello from Hello`)
+        }
+      },
+      {
+        icon: reactIcon,
+        onPress: () => {
+          console.log(`Hello from Hello`)
+        }
+      },
+      {
+        icon: reactIcon,
+        title: "Test",
+        onPress: () => {
+          console.log(`Hello from Hello`)
+        }
+      },
+      {
+        title: "Test",
         onPress: () => {
           console.log(`Hello from Hello`)
         }
@@ -71,19 +98,43 @@ const listOfItems = [
     ]
   },
   {
-    title: "Slide me >>",
-    iconSource: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/2000px-Tux.svg.png',
-    fontSize: 22,
+    iconSource: gitIcon,
+    alignIconLeft: true,
+    title: "Hello",
+    fontSize: 45,
+    backgroundColor: 'rgba(0,0,0,0)',
+    menuBackgroundColor: 'rgba(255,255,255,.2)',
+    fontFamily: 'Verdana',
     onPress: () => {
       console.log("Hello")
     },
-    backgroundColor: 'grey',
-    onSwipeOpenAction: () => {console.log("Open function ran!")},
-    onSwipeCloseAction: () => {console.log("You swiped close and your function ran")},
+    onSwipeOpenAction: () => {
+      console.log("Open function ran!")
+    },
+    onSwipeCloseAction: () => {
+      console.log("You swiped close and your function ran")
+    },
     menuItems: [
       {
-        title: "Open",
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/2000px-Tux.svg.png',
+        onPress: () => {
+          console.log(`Hello from Hello`)
+        }
+      },
+      {
+        icon: reactIcon,
+        onPress: () => {
+          console.log(`Hello from Hello`)
+        }
+      },
+      {
+        icon: reactIcon,
+        title: "Test",
+        onPress: () => {
+          console.log(`Hello from Hello`)
+        }
+      },
+      {
+        title: "Test",
         onPress: () => {
           console.log(`Hello from Hello`)
         }
@@ -91,47 +142,72 @@ const listOfItems = [
     ]
   },
   {
-    title: "Hello there!",
-    iconSource: 'http://www.pd4pic.com/images/flat-right-arrow-line-theme-action-icon.png',
-    fontSize: 22,
-    opacity: .5,
+    title: "Welcome!",
+    fontSize: 45,
+    backgroundColor: 'rgba(0,0,0,.5)',
+    menuBackgroundColor: 'rgba(255,255,255,.5)',
+    fontFamily: 'Verdana',
     onPress: () => {
-      console.log("Hello from the second one")
+      console.log("Hello")
+    },
+    onSwipeOpenAction: () => {
+      console.log("Open function ran!")
+    },
+    onSwipeCloseAction: () => {
+      console.log("You swiped close and your function ran")
     },
     menuItems: [
       {
-        title: "Item One",
-        titleColor: 'red',
+        icon: reactIcon,
+        title: "Test",
         onPress: () => {
-          console.log(`Hello from item one`)
+          console.log(`Hello from Hello`)
         }
       },
       {
-        title: "Item Two",
-        titleColor: 'blue',
+        icon: reactIcon,
+        title: "Test",
         onPress: () => {
-          console.log(`Hello from item two`)
+          console.log(`Hello from Hello`)
         }
       },
       {
-        title: "Item Three",
-        titleColor: 'green',
+        icon: reactIcon,
+        title: "Test",
         onPress: () => {
-          console.log(`Hello from item two`)
+          console.log(`Hello from Hello`)
         }
       },
       {
-        title: "Item Four",
-        titleColor: 'orange',
+        icon: reactIcon,
+        title: "Test",
         onPress: () => {
-          console.log(`Hello from item two`)
+          console.log(`Hello from Hello`)
         }
       }
     ]
   }
 ];
 
-var FullSwipe = React.createClass({
+var FullSwipe = React.createClass ({
+  getInitialState: function () {
+    return {
+      text: 'Hello from FullSwipe!',
+    }
+  },
+
+  onPress: function () {
+    console.log("Button pressed");
+  },
+
+  swipeOpenUpdate: function () {
+    this.setState({text: "onSwipeOpenAction worked"})
+  },
+
+  swipeCloseUpdate: function () {
+    this.setState({text: "onSwipeCloseAction worked"})
+  },
+
   render: function () {
     const CompiledList = listOfItems.map((item, it) => (
       <FullSwipeComponent
@@ -145,19 +221,20 @@ var FullSwipe = React.createClass({
         backgroundColor={item.backgroundColor}
         backgroundImage={item.backgroundImage}
         iconSource={item.iconSource}
-        opacity={item.opacity}
+        alignIconLeft={item.alignIconLeft}
+        borderRadiusLeft={item.borderRadiusLeft}
+        borderRadiusRight={item.borderRadiusRight}
         onPress={item.onPress}
-        onSwipeOpenAction={item.onSwipeOpenAction}
-        onSwipeCloseAction={item.onSwipeCloseAction}
+        onSwipeOpenAction={this.swipeOpenUpdate}
+        onSwipeCloseAction={this.swipeCloseUpdate}
       />
     ));
     return (
       <Image style={styles.container}
-             source={{uri:'http://static3.depositphotos.com/1000189/134/i/950/depositphotos_1340581-Green-Grass-Background.jpg'}}>
+             source={{uri:wallpaper}}>
         <View style={styles.backdropView}>
-          <Text style={styles.headline}>Example Full Swipe</Text>
+          <Text style={styles.headline}>{this.state.text}</Text>
         </View>
-
         <View style={[{position: 'absolute', bottom: 0}]}>
           {CompiledList}
         </View>
@@ -171,7 +248,7 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    //backgroundColor: '#F5FCFF',
+    backgroundColor: 'rgba(0,0,0,0)',
     resizeMode: "cover",
   },
   welcome: {
@@ -206,5 +283,3 @@ var styles = StyleSheet.create({
 ```
 
 TODO: Unit tests and background image
-
-.

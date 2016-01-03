@@ -61,7 +61,7 @@ export default React.createClass({
             ref={component => this._root = component}
             style={[styles.underMenuItemGroup, {width, opacity}]}>
             <Image style={[styles.icon, {width: 50, opacity, height: height * .8}]} source={{uri: icon}}/>
-            <Text style={[styles.underMenuItemText, {color: titleColor}]}>{checkedTitle}</Text>
+            <Text style={[styles.underMenuItemText, {opacity, color: titleColor}]}>{checkedTitle}</Text>
           </View>
         )
       } else if (!icon && title)  {
@@ -70,7 +70,7 @@ export default React.createClass({
             ref={component => this._root = component}
             style={[styles.underMenuItemGroup, {width, opacity}]}>
             <Text
-              style={[styles.underMenuItemText, {color: titleColor, height, paddingTop: height * .4}]}>{title}</Text>
+              style={[styles.underMenuItemText, {opacity, color: titleColor, height, paddingTop: height * .4}]}>{title}</Text>
           </View>
         )
       } else if (icon && !title) {
