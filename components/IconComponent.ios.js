@@ -55,22 +55,37 @@ export default React.createClass({
     const checkedTitle = title.length < 14 ? title : 'TRUNCATED';
 
     const component = (() => {
-      if (this.props.icon) {
+      if (icon && title) {
         return (
-          <Image
+          <View
             ref={component => this._root = component}
             style={[styles.underMenuItemGroup, {width, opacity}]}>
             <Image style={[styles.icon, {width: 50, opacity, height: height * .8}]} source={{uri: icon}}/>
-            <Text style={[styles.underMenuItemText, {opacity, color: titleColor}]}>{checkedTitle}</Text>
-          </Image>
+            <Text style={[styles.underMenuItemText, {color: titleColor}]}>{checkedTitle}</Text>
+          </View>
+        )
+      } else if (!icon && title)  {
+        return (
+          <View
+            ref={component => this._root = component}
+            style={[styles.underMenuItemGroup, {width, opacity}]}>
+            <Text
+              style={[styles.underMenuItemText, {color: titleColor, height, paddingTop: height * .4}]}>{title}</Text>
+          </View>
+        )
+      } else if (icon && !title) {
+        return (
+          <View
+            ref={component => this._root = component}
+            style={[styles.underMenuItemGroup, {width, opacity}]}>
+            <Image style={[styles.icon, {width: 50, opacity, height}]} source={{uri: icon}}/>
+          </View>
         )
       } else {
         return (
           <View
             ref={component => this._root = component}
             style={[styles.underMenuItemGroup, {width, opacity}]}>
-            <Text
-              style={[styles.underMenuItemText, {color: titleColor, height, opacity, paddingTop: height * .4}]}>{title}</Text>
           </View>
         )
       }
@@ -79,10 +94,10 @@ export default React.createClass({
     var button = this.props.open ? (
       <TouchableOpacity onPress={onPress}
                         style={[styles.viewStyle, styles.underMenuItem, {opacity, borderTopRightRadius, borderBottomRightRadius, borderTopLeftRadius, borderBottomLeftRadius, width: itemWidth, left: distance,}]}>
-      {component}
-    </TouchableOpacity>) : null;
+        {component}
+      </TouchableOpacity>) : null;
 
-    return <View style={[{opacity}]}>{button}</View>;
+    return( <View>{button}</View>);
   }
 });
 
@@ -112,5 +127,5 @@ let styles = StyleSheet.create({
   },
   icon: {
     resizeMode: 'contain',
-  }
+  },
 });

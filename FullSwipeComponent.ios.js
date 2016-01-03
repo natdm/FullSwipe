@@ -204,7 +204,7 @@ export default React.createClass({
 
     return (
       //TODO: If you delete one, the one below it becomes 'swiped'. Create an swiped bool value to stop this?
-      <View style={[styles.underMenu, {backgroundColor: menuBackgroundColor, opacity: thisOpacity, borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius}]}>
+      <View style={[styles.backdroppable, styles.underMenu, {backgroundColor: menuBackgroundColor, opacity: thisOpacity, borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius}]}>
 
         {/*   Container component for menu items UNDER the cover   */}
 
@@ -231,21 +231,20 @@ export default React.createClass({
           }
         )}
         <View ref="box"
-              style={[styles.viewStyle, {opacity, height, borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius, width: window.width, backgroundColor}]} {...this.panResponder.panHandlers}>
+              style={[styles.viewStyle, styles.backdroppable, {height, borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius, width: window.width, backgroundColor}]} {...this.panResponder.panHandlers}>
           {/*   Container for cover */}
 
           <TouchableOpacity
-            style={[styles.viewStyle, styles.menuClickable,{opacity, height, borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius}]}
+            style={[styles.viewStyle, styles.menuClickable,{height, borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius}]}
             onPress={() => {
               if (!this.state.open) {
                 onPress();
               }
             }}>
 
-            <View style={[{width: menuWidth, justifyContent: 'center', alignItems: 'center', borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius, opacity}]}>
-              {iconSource ? (<Image style={[styles.icon, {opacity, width: 50, height: height * .8, paddingLeft: menuWidth}]}
-                                    source={{uri:iconSource}}/>) : (
-                <Text style={[{fontFamily, fontWeight, fontSize,letterSpacing, textAlign: 'center'}]}>{title}</Text>)}
+            <View style={[styles.backdroppable, {width: menuWidth, justifyContent: 'center', alignItems: 'center', borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius}]}>
+              {iconSource ? (<Image style={[styles.icon, styles.backdroppable,{ width: 50, height: height * .8, paddingLeft: menuWidth}]} source={{uri:iconSource}}/>)
+                : (<Text style={[styles.backdroppable, {fontFamily, fontWeight, fontSize,letterSpacing, textAlign: 'center'}]}>{title}</Text>)}
             </View>
 
           </TouchableOpacity>
@@ -274,5 +273,8 @@ let styles = StyleSheet.create({
   },
   underMenu: {
     flexDirection: 'row',
+  },
+  backdroppable: {
+    backgroundColor: 'rgba(0,0,0,0)',
   }
 });
