@@ -30,8 +30,8 @@ let {
  menuItems will only show the first items four in an array. Not able to scroll yet.
  If it has more than four, it errors and shows 0.
 
- TODO: for cover: add  backgroundImage
  TODO: Add unit tests
+ TODO: Bug, fix swipe open and close functions to run when swiped fully open.
  TODO: Optimize for horizontal view.
  */
 
