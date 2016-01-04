@@ -1,4 +1,5 @@
 #Full Swipe React-Native Component
+###Works on iOS and Android
 
 ![alt tag](https://raw.githubusercontent.com/natdm/FullSwipe/master/images/FullSwipeGif2.gif)
 
@@ -68,7 +69,7 @@
 ###Example:
 
 ```javascript
-import FullSwipeComponent from './FullSwipe/FullSwipeComponent.ios'
+import FullSwipeComponent from './FullSwipe/FullSwipeComponent'
 
 const wallpaper = 'http://wallpaper.pickywallpapers.com/1280x1024/clean-blurry.jpg';
 const reactIcon = 'http://frostney.github.io/talks/react-native/slides/images/react-logo.png';

@@ -55,7 +55,7 @@ export default React.createClass({
     fontWeight: React.PropTypes.string,
     backgroundColor: React.PropTypes.string,
     backgroundImage: React.PropTypes.string,
-    iconSource: React.PropTypes.string,
+    icon: React.PropTypes.string,
     borderRadiusLeft: React.PropTypes.number,
     borderRadiusRight: React.PropTypes.number,
     onPress: React.PropTypes.func,
@@ -173,7 +173,7 @@ export default React.createClass({
 
   render: function () {
     let {
-      title,height,onPress,fontFamily,iconSource,
+      title,height,onPress,fontFamily,icon,
       fontSize,backgroundColor,menuBackgroundColor,letterSpacing, fontWeight,
       borderRadiusLeft, borderRadiusRight, iconLeft
       } = this.props;
@@ -229,6 +229,7 @@ export default React.createClass({
                              borderBottomRightRadius={borderBottomRightRadius}
                              opacity={this.state.open ? 1 : 0}
                              open={this.state.open}
+                             fontSize={item.fontSize}
               />
             )
           }
@@ -246,8 +247,8 @@ export default React.createClass({
             }}>
 
             <View style={[{width: menuWidth,  borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius}]}>
-              {iconSource ?
-                (<Image style={[styles.icon, {height: height * .9, paddingLeft: menuWidth}]} source={{uri:iconSource}}/>)
+              {icon ?
+                (<Image style={[styles.icon, {height: height * .9, paddingLeft: menuWidth}]} source={{uri:icon}}/>)
                 :
                 (<Text style={[{fontFamily, fontWeight, fontSize, letterSpacing, textAlign: 'center'}]}>{title}</Text>)
               }

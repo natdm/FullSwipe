@@ -47,7 +47,7 @@ export default React.createClass({
   render: function () {
     let {
       width, height, icon, title, titleColor,
-      onPress, itemWidth, distance, opacity,
+      onPress, itemWidth, distance, opacity, fontSize,
       borderTopLeftRadius, borderBottomLeftRadius,
       borderTopRightRadius, borderBottomRightRadius
       } = this.props;
@@ -68,9 +68,9 @@ export default React.createClass({
         return (
           <View
             ref={component => this._root = component}
-            style={[styles.underMenuItemGroup, {width, opacity}]}>
+            style={[styles.underMenuItemGroup, styles.justTitleGroup, {width, opacity}]}>
             <Text
-              style={[styles.underMenuItemText, {opacity, color: titleColor, height, paddingTop: height * .4}]}>{title}</Text>
+              style={[styles.underMenuItemText,styles.justTitle, {opacity, fontSize, color: titleColor, height}]}>{title}</Text>
           </View>
         )
       } else if (icon && !title) {
@@ -120,6 +120,14 @@ let styles = StyleSheet.create({
   underMenuItemText: {
     textAlign: 'center',
     flex: 1,
+  },
+  justTitle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 40,
+  },
+  justTitleGroup: {
+    alignItems: 'center'
   },
   underMenuItemGroup: {
     justifyContent: 'center',
