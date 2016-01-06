@@ -1,0 +1,29 @@
+{
+  "name": "fullswipe",
+  "version": "1.0.0",
+  "description": "Swiping component for both Android and iOS",
+  "main": "FullSwipeComponent.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natdm/FullSwipe.git"
+  },
+  "keywords": [
+    "react-component",
+    "react",
+    "native",
+    "iOS",
+    "android",
+    "fullswipe",
+    "swipe",
+    "ios"
+  ],
+  "author": "nathan.hyland@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/natdm/FullSwipe/issues"
+  },
+  "homepage": "https://github.com/natdm/FullSwipe#readme"
+}

@@ -41,7 +41,7 @@ let forceMinClose = menuWidth * .3;
 
 let lastState = false;
 
-import IconComponent from './components/IconComponent.ios'
+import IconComponent from './components/IconComponent'
 
 export default React.createClass({
 
