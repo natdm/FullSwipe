@@ -1,8 +1,8 @@
 'use strict';
-let Dimensions = require('Dimensions');
-let window = Dimensions.get('window');
-let React = require('react-native');
-let {
+const Dimensions = require('Dimensions');
+const window = Dimensions.get('window');
+const React = require('react-native');
+const {
   StyleSheet,
   View,
   PanResponder,
@@ -35,9 +35,9 @@ let {
  TODO: Optimize for horizontal view.
  */
 
-let menuWidth = window.width * .9;
-let forceMin = menuWidth * .6;
-let forceMinClose = menuWidth * .3;
+const menuWidth = window.width * .9;
+const forceMin = menuWidth * .6;
+const forceMinClose = menuWidth * .3;
 
 let lastState = false;
 
@@ -133,7 +133,7 @@ export default React.createClass({
 
   handleMove: function (e, gestureState) {
 
-    let panningRight = gestureState.dx > 10;
+    const panningRight = gestureState.dx > 10;
     if (panningRight && this.state.open) {
       return;
     }
@@ -172,7 +172,7 @@ export default React.createClass({
   },
 
   render: function () {
-    let {
+    const {
       title,height,onPress,fontFamily,icon,
       fontSize,backgroundColor,menuBackgroundColor,letterSpacing, fontWeight,
       borderRadiusLeft, borderRadiusRight, iconLeft
@@ -193,7 +193,7 @@ export default React.createClass({
       }
     })();
 
-    let itemWidth = menuWidth / menuItems.length;
+    const itemWidth = menuWidth / menuItems.length;
 
     function getDistance(width) {
       let i = 0;
@@ -203,7 +203,7 @@ export default React.createClass({
     }
 
 
-    let leftDistance = getDistance(itemWidth);
+    const leftDistance = getDistance(itemWidth);
 
     return (
       <View style={[styles.underMenu, {backgroundColor: this.state.open ? menuBackgroundColor : 'rgba(0,0,0,0)', borderTopLeftRadius, borderBottomLeftRadius, borderTopRightRadius, borderBottomRightRadius}]}>
@@ -263,7 +263,7 @@ export default React.createClass({
 });
 
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
   menuClickable: {
     width: window.width,
     alignItems: 'center',

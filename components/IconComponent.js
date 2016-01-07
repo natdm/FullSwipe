@@ -1,8 +1,8 @@
 'use strict';
-let Dimensions = require('Dimensions');
-let window = Dimensions.get('window');
-let React = require('react-native');
-let {
+const Dimensions = require('Dimensions');
+const window = Dimensions.get('window');
+const React = require('react-native');
+const {
   StyleSheet,
   View,
   Text,
@@ -45,7 +45,7 @@ export default React.createClass({
 
 
   render: function () {
-    let {
+    const {
       width, height, icon, title, titleColor,
       onPress, itemWidth, distance, opacity, fontSize,
       borderTopLeftRadius, borderBottomLeftRadius,
@@ -91,7 +91,7 @@ export default React.createClass({
       }
     })();
 
-    var button = this.props.open ? (
+    let button = this.props.open ? (
       <TouchableOpacity onPress={onPress}
                         style={[styles.viewStyle, styles.underMenuItem, {opacity, borderTopRightRadius, borderBottomRightRadius, borderTopLeftRadius, borderBottomLeftRadius, width: itemWidth, left: distance,}]}>
         {component}
@@ -102,7 +102,7 @@ export default React.createClass({
 });
 
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
   viewStyle: {
     flex: 1,
     flexDirection: 'row',
