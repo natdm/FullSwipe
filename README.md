@@ -1,11 +1,11 @@
-#Full Swipe React-Native Component
+# Full Swipe React-Native Component
 ###Works on iOS and Android
 
 FullSwipe is a component for React-Natives iOS or Android platforms. It allows a swipable menu similar to iOS's mail application. FullSwipe is able to have up to four menu items below the 'cover', with functions on each item press, each swipe (open and close), and labels or pictures on each item and the cover. Almost everything is customizable (look at the props below) and I'm working on more.
 
 ![alt tag](https://raw.githubusercontent.com/natdm/FullSwipe/master/images/FullSwipeGif2.gif)
 
-###Customize anything.
+### Customize anything.
 * Opacity through RGB
 * Functions on swipeOpen, swipeClose, cover click, and each icon click.
 * Up to 4 icons underneath.
@@ -13,7 +13,7 @@ FullSwipe is a component for React-Natives iOS or Android platforms. It allows a
 
 
 
-###Props:
+### Props:
 * title
   *  optional string/int
   *  Title for the cover
